@@ -1,0 +1,34 @@
+{
+  "stations": [
+    {
+      "id": 0,
+      "fuel": "gas",
+      "time": [1, 5]
+    },
+    {
+      "id": 1,
+      "fuel": "diesel",
+      "time": [1, 5]
+    },
+    {
+      "id": 2,
+      "fuel": "lpg",
+      "time": [1, 5]
+    },
+    {
+      "id": 3,
+      "fuel": "electric",
+      "time": [3, 10]
+    }
+  ],
+  "registers": [
+    {
+      "id": 0,
+      "time": [0.5, 2]
+    },
+    {
+      "id": 1,
+      "time": [0.5, 2]
+    }
+  ]
+}
