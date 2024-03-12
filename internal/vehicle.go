@@ -1,6 +1,9 @@
 package internal
 
+import "time"
+
 type Vehicle struct {
-	fuel string
-	done chan bool
+	Fuel     string
+	WaitTime time.Duration
+	Done     chan bool
 }
