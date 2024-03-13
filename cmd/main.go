@@ -17,27 +17,27 @@ func main() {
 	}
 	fmt.Printf("Config načten s %d pokladnami a %d stanicemi.\n", len(config.Registers), len(config.Stations))
 
-	// Inicializace stanic a pokladen na základě configu
+	// Init of stations and registers
 	stations := internal.InitializeStations(config.Stations)
 	registers := internal.InitializeRegisters(config.Registers)
 
-	// Spuštění generátoru aut
+	// Start vehicle generator
 	go generateVehicles(stations, config.Generator)
 
 	var wg sync.WaitGroup
 
-	// Obsluha pokladen
+	// run registers
 	for _, register := range registers {
 		wg.Add(1)
 		go registerRoutine(register)
 	}
-	// Obsluha stanic
+	// run stations
 	for _, station := range stations {
 		wg.Add(1)
 		go stationRoutine(station, registers)
 	}
 
-	// Čekání na dokončení zpracování všech aut
+	// waiting till end (never)
 	wg.Wait()
 
 	fmt.Println("Simulace čerpací stanice dokončena.")
