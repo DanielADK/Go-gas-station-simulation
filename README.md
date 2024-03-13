@@ -20,6 +20,16 @@ příkazem:
 ```bash
 go run main.go
 ```
+Nebo pomocí Dockeru:
+
+```bash
+# Sestavte obraz v Dockeru
+docker build -t gas-station-simulation .
+
+# Spusťte kontejner z obrazu
+docker run -d --name gas-station-simulation-container gas-station-simulation
+```
+
 Projekt dále obsahuje konfigurační soubory, které umožňují nastavit parametry simulace, jako jsou typy a počet stanic a 
 pokladen.
 
@@ -47,6 +57,14 @@ simulation with the command:
 
 ```bash
 go run main.go
+```
+Or with Docker:
+```bash
+# Build Docker image
+docker build -t gas-station-simulation .
+
+# Run container from image
+docker run -d --name gas-station-simulation-container gas-station-simulation
 ```
 The project also includes configuration files that allow setting the parameters of the simulation, such as the types 
 and the number of stations and cash registers.
