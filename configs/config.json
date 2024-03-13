@@ -52,6 +52,13 @@
     }
   ],
   "generator": {
-    "time": [0.1, 0.5]
+    "time": [0.1, 0.5],
+    "fuel_types": [
+      "gas",
+      "diesel",
+      "lpg",
+      "electric",
+      "hydrogen"
+    ]
   }
 }

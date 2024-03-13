@@ -44,7 +44,7 @@ func main() {
 }
 
 func generateVehicles(stations []*internal.Station, config configs.GeneratorConfig) {
-	fuelTypes := []string{"gas", "diesel", "lpg", "electric", "hydrogen"}
+	fuelTypes := config.FuelTypes
 	for {
 		// Generate vehicle
 		chosenFuel := fuelTypes[rand.Intn(len(fuelTypes))]

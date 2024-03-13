@@ -24,6 +24,7 @@ type RegisterConfig struct {
 
 type GeneratorConfig struct {
 	TimeRange [2]float64 `json:"time"`
+	FuelTypes []string   `json:"fuel_types"`
 }
 
 func LoadConfigFromFile(filePath string) (Config, error) {
