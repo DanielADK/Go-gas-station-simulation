@@ -1,29 +1,48 @@
 package internal
 
 import (
-	"math/rand"
-	"time"
+	"hw01/configs"
+	"sync"
 )
 
 type Station struct {
-	Id        int
-	Fuel      string
-	TimeRange [2]float64
-	Vehicle   chan Vehicle
+	Id          int
+	Fuel        string
+	TimeRange   [2]float64
+	VehicleChan chan *Vehicle
+	QueueLen    int
+	Mutex       sync.Mutex
 }
 
-func ServeStation(config StationConfig, vehicles chan Vehicle, toRegister chan Vehicle) {
-	for vehicle := range vehicles {
-		// Waiting time
-		minTime := station.TimeRange[0]
-		maxTime := station.TimeRange[1]
-		waitTime := minTime + rand.Float64()*(maxTime-minTime)
-		vehicle.WaitTime = time.Second * time.Duration(waitTime)
-		// Sleep (fuel loading)
-		time.Sleep(vehicle.WaitTime)
-		// Add to register queue
-		toRegister <- vehicle
-		// Wait for register done
-		<-vehicle.Done
+func InitializeStations(configs []configs.StationConfig) []*Station {
+	var stations []*Station
+	for _, cfg := range configs {
+		stations = append(stations, &Station{
+			Id:          cfg.Id,
+			Fuel:        cfg.Fuel,
+			TimeRange:   cfg.TimeRange,
+			VehicleChan: make(chan *Vehicle, 10),
+		})
 	}
+	return stations
+}
+
+func (s *Station) lock() {
+	s.Mutex.Lock()
+}
+
+func (s *Station) unlock() {
+	s.Mutex.Unlock()
+}
+
+func (s *Station) Increment() {
+	s.lock()
+	s.QueueLen++
+	s.unlock()
+}
+
+func (s *Station) Decrement() {
+	s.lock()
+	s.QueueLen--
+	s.unlock()
 }

@@ -1,25 +1,47 @@
 package internal
 
 import (
-	"math/rand"
-	"time"
+	"hw01/configs"
+	"sync"
 )
 
 type Register struct {
-	Id        int
-	TimeRange [2]float64
-	Vehicle   chan Vehicle
+	Id          int
+	TimeRange   [2]float64
+	VehicleChan chan *Vehicle
+	QueueLen    int
+	Mutex       sync.Mutex
 }
 
-func ServeRegister(register Register) {
-	for vehicle := range register.Vehicle {
-		// Waiting time
-		minTime := register.TimeRange[0]
-		maxTime := register.TimeRange[1]
-		waitTime := minTime + rand.Float64()*(maxTime-minTime)
-		// Sleep (payment)
-		time.Sleep(time.Second * time.Duration(waitTime))
-		// Signal done payment
-		vehicle.Done <- true
+func InitializeRegisters(configs []configs.RegisterConfig) []*Register {
+	var registers []*Register
+	for _, cfg := range configs {
+		registers = append(registers, &Register{
+			Id:          cfg.Id,
+			TimeRange:   cfg.TimeRange,
+			VehicleChan: make(chan *Vehicle, 10),
+			QueueLen:    0,
+		})
 	}
+	return registers
+}
+
+func (r *Register) lock() {
+	r.Mutex.Lock()
+}
+
+func (r *Register) unlock() {
+	r.Mutex.Unlock()
+}
+
+func (r *Register) Increment() {
+	r.lock()
+	r.QueueLen++
+	r.unlock()
+}
+
+func (r *Register) Decrement() {
+	r.lock()
+	r.QueueLen--
+	r.unlock()
 }

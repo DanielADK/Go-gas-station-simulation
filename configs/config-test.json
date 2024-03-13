@@ -1,24 +1,44 @@
 {
   "stations": [
     {
-      "id": 0,
+      "id": 10,
       "fuel": "gas",
       "time": [0.1, 0.5]
     },
     {
-      "id": 1,
+      "id": 11,
+      "fuel": "gas",
+      "time": [0.1, 0.5]
+    },
+    {
+      "id": 20,
       "fuel": "diesel",
       "time": [0.1, 0.5]
     },
     {
-      "id": 2,
+      "id": 21,
+      "fuel": "diesel",
+      "time": [0.1, 0.5]
+    },
+    {
+      "id": 30,
       "fuel": "lpg",
       "time": [0.1, 0.5]
     },
     {
-      "id": 3,
+      "id": 4,
       "fuel": "electric",
-      "time": [0.3, 0.10]
+      "time": [0.3, 1.0]
+    },
+    {
+      "id": 41,
+      "fuel": "electric",
+      "time": [0.3, 1.0]
+    },
+    {
+      "id": 42,
+      "fuel": "electric",
+      "time": [0.3, 1.0]
     }
   ],
   "registers": [
@@ -30,5 +50,8 @@
       "id": 1,
       "time": [0.05, 0.2]
     }
-  ]
+  ],
+  "generator": {
+    "time": [0.05, 0.1]
+  }
 }

@@ -8,15 +8,21 @@ import (
 type Config struct {
 	Stations  []StationConfig  `json:"stations"`
 	Registers []RegisterConfig `json:"registers"`
+	Generator GeneratorConfig  `json:"generator"`
 }
 
 type StationConfig struct {
+	Id        int        `json:"id"`
 	Fuel      string     `json:"fuel"`
 	TimeRange [2]float64 `json:"time"`
 }
 
 type RegisterConfig struct {
 	Id        int        `json:"id"`
+	TimeRange [2]float64 `json:"time"`
+}
+
+type GeneratorConfig struct {
 	TimeRange [2]float64 `json:"time"`
 }
 
