@@ -1,1 +1,35 @@
-{"Diesel":{"AverageDieselTime":"18278.13ns","MaxDieselTime":"94290.00ns","TotalDieselTime":"37177725.00ns","DieselCount":2034},"Gas":{"AverageGasTime":"17792.36ns","MaxGasTime":"74842.00ns","TotalGasTime":"35762645.00ns","GasCount":2010},"LPG":{"AverageLPGTime":"12553.11ns","MaxLPGTime":"205499.00ns","TotalLPGTime":"25307071.00ns","LPGCount":2016},"Electric":{"AverageElectricTime":"20087.93ns","MaxElectricTime":"116821.00ns","TotalElectricTime":"38428214.00ns","ElectricCount":1913},"Register":{"AverageRegisterTime":"1009.28ns","MaxRegisterTime":"179278.00ns","TotalRegisterTime":"8047025.00ns","RegisterCount":7973},"InvalidVehicles":{"Count":2027}}
+{
+  "Diesel":{
+    "AverageDieselTime":"18278.13ns",
+    "MaxDieselTime":"94290.00ns",
+    "TotalDieselTime":"37177725.00ns",
+    "DieselCount":2034
+  },
+  "Gas":{
+    "AverageGasTime":"17792.36ns",
+    "MaxGasTime":"74842.00ns",
+    "TotalGasTime":"35762645.00ns",
+    "GasCount":2010
+  },
+  "LPG":{
+    "AverageLPGTime":"12553.11ns",
+    "MaxLPGTime":"205499.00ns",
+    "TotalLPGTime":"25307071.00ns",
+    "LPGCount":2016
+  },
+  "Electric":{
+    "AverageElectricTime":"20087.93ns",
+    "MaxElectricTime":"116821.00ns",
+    "TotalElectricTime":"38428214.00ns",
+    "ElectricCount":1913
+  },
+  "Register":{
+    "AverageRegisterTime":"1009.28ns",
+    "MaxRegisterTime":"179278.00ns",
+    "TotalRegisterTime":"8047025.00ns",
+    "RegisterCount":7973
+  },
+  "InvalidVehicles":{
+    "Count":2027
+  }
+}
