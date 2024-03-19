@@ -3,42 +3,42 @@
     {
       "id": 10,
       "fuel": "gas",
-      "time": [0.1, 0.5]
+      "time": [0.01, 0.05]
     },
     {
       "id": 11,
       "fuel": "gas",
-      "time": [0.1, 0.5]
+      "time": [0.01, 0.05]
     },
     {
       "id": 20,
       "fuel": "diesel",
-      "time": [0.1, 0.5]
+      "time": [0.01, 0.05]
     },
     {
       "id": 21,
       "fuel": "diesel",
-      "time": [0.1, 0.5]
+      "time": [0.01, 0.05]
     },
     {
       "id": 30,
       "fuel": "lpg",
-      "time": [0.1, 0.5]
+      "time": [0.01, 0.05]
     },
     {
-      "id": 4,
+      "id": 40,
       "fuel": "electric",
-      "time": [0.3, 1.0]
+      "time": [0.03, 0.1]
     },
     {
       "id": 41,
       "fuel": "electric",
-      "time": [0.3, 1.0]
+      "time": [0.03, 0.1]
     },
     {
       "id": 42,
       "fuel": "electric",
-      "time": [0.3, 1.0]
+      "time": [0.03, 0.1]
     }
   ],
   "registers": [
@@ -52,7 +52,8 @@
     }
   ],
   "generator": {
-    "time": [0.05, 0.1],
+    "count_of_cars": 1000,
+    "generation_delay": [0.01, 0.05],
     "fuel_types": [
       "gas",
       "diesel",

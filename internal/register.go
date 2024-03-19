@@ -19,29 +19,17 @@ func InitializeRegisters(configs []configs.RegisterConfig) []*Register {
 		registers = append(registers, &Register{
 			Id:          cfg.Id,
 			TimeRange:   cfg.TimeRange,
-			VehicleChan: make(chan *Vehicle, 10),
+			VehicleChan: make(chan *Vehicle),
 			QueueLen:    0,
 		})
 	}
 	return registers
 }
 
-func (r *Register) lock() {
+func (r *Register) Lock() {
 	r.Mutex.Lock()
 }
 
-func (r *Register) unlock() {
+func (r *Register) Unlock() {
 	r.Mutex.Unlock()
-}
-
-func (r *Register) Increment() {
-	r.lock()
-	r.QueueLen++
-	r.unlock()
-}
-
-func (r *Register) Decrement() {
-	r.lock()
-	r.QueueLen--
-	r.unlock()
 }

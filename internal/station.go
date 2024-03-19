@@ -21,28 +21,16 @@ func InitializeStations(configs []configs.StationConfig) []*Station {
 			Id:          cfg.Id,
 			Fuel:        cfg.Fuel,
 			TimeRange:   cfg.TimeRange,
-			VehicleChan: make(chan *Vehicle, 10),
+			VehicleChan: make(chan *Vehicle),
 		})
 	}
 	return stations
 }
 
-func (s *Station) lock() {
+func (s *Station) Lock() {
 	s.Mutex.Lock()
 }
 
-func (s *Station) unlock() {
+func (s *Station) Unlock() {
 	s.Mutex.Unlock()
-}
-
-func (s *Station) Increment() {
-	s.lock()
-	s.QueueLen++
-	s.unlock()
-}
-
-func (s *Station) Decrement() {
-	s.lock()
-	s.QueueLen--
-	s.unlock()
 }
