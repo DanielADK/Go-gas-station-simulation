@@ -1,11 +1,16 @@
 package internal
 
-import "sync"
+import (
+	"sync"
+	"time"
+)
 
 type Vehicle struct {
-	Fuel  string
-	Done  chan bool
-	Mutex sync.Mutex
+	Fuel             string
+	Done             chan bool
+	StationQueueNow  time.Time
+	RegisterQueueNow time.Time
+	Mutex            sync.Mutex
 }
 
 func (s *Vehicle) Lock() {

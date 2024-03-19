@@ -14,7 +14,7 @@ type Station struct {
 	Mutex       sync.Mutex
 }
 
-func InitializeStations(configs []configs.StationConfig) []*Station {
+func InitStations(configs []configs.StationConfig) []*Station {
 	var stations []*Station
 	for _, cfg := range configs {
 		stations = append(stations, &Station{

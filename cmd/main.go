@@ -10,11 +10,12 @@ import (
 )
 
 type GasStation struct {
-	Stations  []*internal.Station
-	Registers []*internal.Register
-	done      chan bool
-	wg        sync.WaitGroup
-	finishWg  sync.WaitGroup
+	Stations   []*internal.Station
+	Registers  []*internal.Register
+	Statistics *internal.Statistics
+	done       chan bool
+	wg         sync.WaitGroup
+	finishWg   sync.WaitGroup
 }
 
 func main() {
@@ -27,9 +28,10 @@ func main() {
 
 	// Init of stations and registers
 	var gasStation = GasStation{
-		Stations:  internal.InitializeStations(config.Stations),
-		Registers: internal.InitializeRegisters(config.Registers),
-		done:      make(chan bool),
+		Stations:   internal.InitStations(config.Stations),
+		Registers:  internal.InitRegisters(config.Registers),
+		done:       make(chan bool),
+		Statistics: internal.InitStatistics(),
 	}
 
 	// run registers
@@ -67,6 +69,9 @@ func main() {
 	for _, station := range gasStation.Stations {
 		fmt.Printf("Stanice %d končí s %d vozidly.\n", station.Id, station.QueueLen)
 	}
+
+	// Calc statistics
+	gasStation.Statistics.Export().SaveStatisticsToJSON("statistics.json")
 }
 
 func generateVehicles(gasStation *GasStation, config configs.GeneratorConfig) {
@@ -85,6 +90,7 @@ func generateVehicles(gasStation *GasStation, config configs.GeneratorConfig) {
 		chosenStation := findShortestQueueStationChan(gasStation.Stations, chosenFuel)
 		if chosenStation != nil {
 			// Send vehicle to station
+			vehicle.StationQueueNow = time.Now()
 			chosenStation.VehicleChan <- vehicle
 			chosenStation.Lock()
 			chosenStation.QueueLen++
@@ -93,6 +99,7 @@ func generateVehicles(gasStation *GasStation, config configs.GeneratorConfig) {
 			//fmt.Printf("[GEN] Vygeneroval jsem vozidlo typu %s a přiřadil jej stanici %d.\n", chosenFuel, chosenStation.Id)
 		} else {
 			fmt.Printf("[GEN] Nemohu najít vhodnou stanici pro vozidlo s palivem %s. Vozidlo nepříjímám\n", chosenFuel)
+			gasStation.Statistics.AddInvalidVehicle()
 		}
 
 		// Waiting time
@@ -173,6 +180,18 @@ func stationRoutine(station *internal.Station, gasStation *GasStation) {
 			maxTime := station.TimeRange[1]
 			waitTime := minTime + rand.Float64()*(maxTime-minTime)
 
+			// Statistics
+			seconds := time.Since(vehicle.StationQueueNow).Nanoseconds()
+			if station.Fuel == "diesel" {
+				gasStation.Statistics.AddDieselTime(float64(seconds))
+			} else if station.Fuel == "gas" {
+				gasStation.Statistics.AddGasTime(float64(seconds))
+			} else if station.Fuel == "lpg" {
+				gasStation.Statistics.AddLPGTime(float64(seconds))
+			} else if station.Fuel == "electric" {
+				gasStation.Statistics.AddElectricTime(float64(seconds))
+			}
+
 			// Print
 			//fmt.Printf("[S%02d] Vozidlo na %s tankuje po %2.2fs\n", station.Id, vehicle.Fuel, waitTime)
 
@@ -182,6 +201,7 @@ func stationRoutine(station *internal.Station, gasStation *GasStation) {
 			// Find shortest register queue
 			shortestQueueRegisterChan := findShortestQueueRegisterChan(gasStation.Registers)
 			// Send vehicle to register
+			vehicle.RegisterQueueNow = time.Now()
 			shortestQueueRegisterChan.VehicleChan <- vehicle
 			shortestQueueRegisterChan.Lock()
 			shortestQueueRegisterChan.QueueLen++
@@ -242,8 +262,12 @@ func registerRoutine(register *internal.Register, gasStation *GasStation) {
 			maxTime := register.TimeRange[1]
 			waitTime := minTime + rand.Float64()*(maxTime-minTime)
 
+			// Statistics
+			seconds := time.Since(vehicle.RegisterQueueNow).Nanoseconds()
+			gasStation.Statistics.AddRegisterTime(float64(seconds))
+
 			// Print
-			fmt.Printf("[R%02d] Vozidlo na %s platí po %2.2fs\n", register.Id, vehicle.Fuel, waitTime)
+			//fmt.Printf("[R%02d] Vozidlo na %s platí po %2.2fs\n", register.Id, vehicle.Fuel, waitTime)
 
 			// Sleep (payment)
 			time.Sleep(time.Second * time.Duration(waitTime))

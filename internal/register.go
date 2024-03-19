@@ -13,7 +13,7 @@ type Register struct {
 	Mutex       sync.Mutex
 }
 
-func InitializeRegisters(configs []configs.RegisterConfig) []*Register {
+func InitRegisters(configs []configs.RegisterConfig) []*Register {
 	var registers []*Register
 	for _, cfg := range configs {
 		registers = append(registers, &Register{
