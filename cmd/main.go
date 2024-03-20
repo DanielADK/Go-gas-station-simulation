@@ -79,7 +79,9 @@ func generateVehicles(gasStation *GasStation, config configs.GeneratorConfig) {
 	fuelTypes := config.FuelTypes
 	var i uint
 	for i = 0; i < config.CountOfCars; i++ {
-		fmt.Printf("[GEN] Generuji vozidlo %06d/%06d\n", i+1, config.CountOfCars)
+		if (i+1)%1000000 == 0 {
+			fmt.Printf("[GEN] Generuji vozidlo %07d/%07d\n", i+1, config.CountOfCars)
+		}
 		// Generate vehicle
 		chosenFuel := fuelTypes[rand.Intn(len(fuelTypes))]
 		vehicle := &internal.Vehicle{
@@ -98,7 +100,7 @@ func generateVehicles(gasStation *GasStation, config configs.GeneratorConfig) {
 
 			//fmt.Printf("[GEN] Vygeneroval jsem vozidlo typu %s a přiřadil jej stanici %d.\n", chosenFuel, chosenStation.Id)
 		} else {
-			fmt.Printf("[GEN] Nemohu najít vhodnou stanici pro vozidlo s palivem %s. Vozidlo nepříjímám\n", chosenFuel)
+			//fmt.Printf("[GEN] Nemohu najít vhodnou stanici pro vozidlo s palivem %s. Vozidlo nepříjímám\n", chosenFuel)
 			gasStation.Statistics.AddInvalidVehicle()
 		}
 
@@ -181,15 +183,15 @@ func stationRoutine(station *internal.Station, gasStation *GasStation) {
 			waitTime := minTime + rand.Float64()*(maxTime-minTime)
 
 			// Statistics
-			seconds := time.Since(vehicle.StationQueueNow).Nanoseconds()
+			seconds := time.Since(vehicle.StationQueueNow).Seconds()
 			if station.Fuel == "diesel" {
-				gasStation.Statistics.AddDieselTime(float64(seconds))
+				gasStation.Statistics.AddDieselTime(seconds)
 			} else if station.Fuel == "gas" {
-				gasStation.Statistics.AddGasTime(float64(seconds))
+				gasStation.Statistics.AddGasTime(seconds)
 			} else if station.Fuel == "lpg" {
-				gasStation.Statistics.AddLPGTime(float64(seconds))
+				gasStation.Statistics.AddLPGTime(seconds)
 			} else if station.Fuel == "electric" {
-				gasStation.Statistics.AddElectricTime(float64(seconds))
+				gasStation.Statistics.AddElectricTime(seconds)
 			}
 
 			// Print
@@ -263,8 +265,8 @@ func registerRoutine(register *internal.Register, gasStation *GasStation) {
 			waitTime := minTime + rand.Float64()*(maxTime-minTime)
 
 			// Statistics
-			seconds := time.Since(vehicle.RegisterQueueNow).Nanoseconds()
-			gasStation.Statistics.AddRegisterTime(float64(seconds))
+			seconds := time.Since(vehicle.RegisterQueueNow).Seconds()
+			gasStation.Statistics.AddRegisterTime(seconds)
 
 			// Print
 			//fmt.Printf("[R%02d] Vozidlo na %s platí po %2.2fs\n", register.Id, vehicle.Fuel, waitTime)

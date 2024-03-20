@@ -78,41 +78,41 @@ func GetSumAndMaxTime(arr []float64) (float64, float64) {
 }
 
 type DieselStatistics struct {
-	AverageDieselTime string
-	MaxDieselTime     string
-	TotalDieselTime   string
-	DieselCount       int
+	AverageDieselQueueTime string
+	MaxDieselQueueTime     string
+	TotalDieselQueueTime   string
+	DieselCount            int
 }
 
 type GasStatistics struct {
-	AverageGasTime string
-	MaxGasTime     string
-	TotalGasTime   string
-	GasCount       int
+	AverageGasQueueTime string
+	MaxGasQueueTime     string
+	TotalGasQueueTime   string
+	GasCount            int
 }
 
 type LPGStatistics struct {
-	AverageLPGTime string
-	MaxLPGTime     string
-	TotalLPGTime   string
-	LPGCount       int
+	AverageLPGQueueTime string
+	MaxLPGQueueTime     string
+	TotalLPGQueueTime   string
+	LPGCount            int
 }
 
 type ElectricStatistics struct {
-	AverageElectricTime string
-	MaxElectricTime     string
-	TotalElectricTime   string
-	ElectricCount       int
+	AverageElectricQueueTime string
+	MaxElectricQueueTime     string
+	TotalElectricQueueTime   string
+	ElectricCount            int
 }
 type InvalidStatistics struct {
 	Count int
 }
 
 type RegisterStatistics struct {
-	AverageRegisterTime string
-	MaxRegisterTime     string
-	TotalRegisterTime   string
-	RegisterCount       int
+	AverageRegisterQueueTime string
+	MaxRegisterQueueTime     string
+	TotalRegisterQueueTime   string
+	RegisterCount            int
 }
 
 type ExportStatistics struct {
@@ -136,37 +136,37 @@ func (s *Statistics) Export() *ExportStatistics {
 
 	return &ExportStatistics{
 		Diesel: DieselStatistics{
-			AverageDieselTime: fmt.Sprintf("%.2fns", dieselSum/float64(len(s.DieselTimes))),
-			MaxDieselTime:     fmt.Sprintf("%.2fns", dieselMax),
-			TotalDieselTime:   fmt.Sprintf("%.2fns", dieselSum),
-			DieselCount:       len(s.DieselTimes),
+			AverageDieselQueueTime: fmt.Sprintf("%fs", dieselSum/float64(len(s.DieselTimes))),
+			MaxDieselQueueTime:     fmt.Sprintf("%fs", dieselMax),
+			TotalDieselQueueTime:   fmt.Sprintf("%fs", dieselSum),
+			DieselCount:            len(s.DieselTimes),
 		},
 		Gas: GasStatistics{
-			AverageGasTime: fmt.Sprintf("%.2fns", gasSum/float64(len(s.GasTimes))),
-			MaxGasTime:     fmt.Sprintf("%.2fns", gasMax),
-			TotalGasTime:   fmt.Sprintf("%.2fns", gasSum),
-			GasCount:       len(s.GasTimes),
+			AverageGasQueueTime: fmt.Sprintf("%fs", gasSum/float64(len(s.GasTimes))),
+			MaxGasQueueTime:     fmt.Sprintf("%fs", gasMax),
+			TotalGasQueueTime:   fmt.Sprintf("%fs", gasSum),
+			GasCount:            len(s.GasTimes),
 		},
 		LPG: LPGStatistics{
-			AverageLPGTime: fmt.Sprintf("%.2fns", lpgSum/float64(len(s.LPGTimes))),
-			MaxLPGTime:     fmt.Sprintf("%.2fns", lpgMax),
-			TotalLPGTime:   fmt.Sprintf("%.2fns", lpgSum),
-			LPGCount:       len(s.LPGTimes),
+			AverageLPGQueueTime: fmt.Sprintf("%fs", lpgSum/float64(len(s.LPGTimes))),
+			MaxLPGQueueTime:     fmt.Sprintf("%fs", lpgMax),
+			TotalLPGQueueTime:   fmt.Sprintf("%fs", lpgSum),
+			LPGCount:            len(s.LPGTimes),
 		},
 		Electric: ElectricStatistics{
-			AverageElectricTime: fmt.Sprintf("%.2fns", electricSum/float64(len(s.ElectricTimes))),
-			MaxElectricTime:     fmt.Sprintf("%.2fns", electricMax),
-			TotalElectricTime:   fmt.Sprintf("%.2fns", electricSum),
-			ElectricCount:       len(s.ElectricTimes),
+			AverageElectricQueueTime: fmt.Sprintf("%fs", electricSum/float64(len(s.ElectricTimes))),
+			MaxElectricQueueTime:     fmt.Sprintf("%fs", electricMax),
+			TotalElectricQueueTime:   fmt.Sprintf("%fs", electricSum),
+			ElectricCount:            len(s.ElectricTimes),
 		},
 		InvalidVehicles: InvalidStatistics{
 			Count: s.InvalidVehicles,
 		},
 		Register: RegisterStatistics{
-			AverageRegisterTime: fmt.Sprintf("%.2fns", registerSum/float64(len(s.RegisterTimes))),
-			MaxRegisterTime:     fmt.Sprintf("%.2fns", registerMax),
-			TotalRegisterTime:   fmt.Sprintf("%.2fns", registerSum),
-			RegisterCount:       len(s.RegisterTimes),
+			AverageRegisterQueueTime: fmt.Sprintf("%fs", registerSum/float64(len(s.RegisterTimes))),
+			MaxRegisterQueueTime:     fmt.Sprintf("%fs", registerMax),
+			TotalRegisterQueueTime:   fmt.Sprintf("%fs", registerSum),
+			RegisterCount:            len(s.RegisterTimes),
 		},
 	}
 }
