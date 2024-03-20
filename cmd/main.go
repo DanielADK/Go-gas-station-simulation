@@ -19,7 +19,7 @@ type GasStation struct {
 }
 
 func main() {
-	config, err := configs.LoadConfigFromFile("./configs/config-test.json")
+	config, err := configs.LoadConfigFromFile("./configs/config.json")
 	if err != nil {
 		fmt.Println("Chyba při načítání configu:", err)
 		return
@@ -79,9 +79,7 @@ func generateVehicles(gasStation *GasStation, config configs.GeneratorConfig) {
 	fuelTypes := config.FuelTypes
 	var i uint
 	for i = 0; i < config.CountOfCars; i++ {
-		if (i+1)%1000000 == 0 {
-			fmt.Printf("[GEN] Generuji vozidlo %07d/%07d\n", i+1, config.CountOfCars)
-		}
+		fmt.Printf("[GEN] Generuji vozidlo %07d/%07d\n", i+1, config.CountOfCars)
 		// Generate vehicle
 		chosenFuel := fuelTypes[rand.Intn(len(fuelTypes))]
 		vehicle := &internal.Vehicle{

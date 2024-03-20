@@ -1,35 +1,35 @@
 {
   "Diesel":{
-    "AverageDieselQueueTime":"0.000004s",
-    "MaxDieselQueueTime":"0.093375s",
-    "TotalDieselQueueTime":"71.674220s",
-    "DieselCount":19990598
+    "AverageDieselQueueTime":"0.661831s",
+    "MaxDieselQueueTime":"5.003983s",
+    "TotalDieselQueueTime":"131.042478s",
+    "DieselCount":198
   },
   "Gas":{
-    "AverageGasQueueTime":"0.000004s",
-    "MaxGasQueueTime":"0.344900s",
-    "TotalGasQueueTime":"72.134230s",
-    "GasCount":20000361
+    "AverageGasQueueTime":"0.563395s",
+    "MaxGasQueueTime":"5.999973s",
+    "TotalGasQueueTime":"98.030660s",
+    "GasCount":174
   },
   "LPG":{
-    "AverageLPGQueueTime":"0.000003s",
-    "MaxLPGQueueTime":"0.093754s",
-    "TotalLPGQueueTime":"57.073187s",
-    "LPGCount":20003557
+    "AverageLPGQueueTime":"1.926770s",
+    "MaxLPGQueueTime":"6.001939s",
+    "TotalLPGQueueTime":"391.134286s",
+    "LPGCount":203
   },
   "Electric":{
-    "AverageElectricQueueTime":"0.000004s",
-    "MaxElectricQueueTime":"0.023344s",
-    "TotalElectricQueueTime":"78.887771s",
-    "ElectricCount":19998839
+    "AverageElectricQueueTime":"1.995122s",
+    "MaxElectricQueueTime":"10.005482s",
+    "TotalElectricQueueTime":"383.063459s",
+    "ElectricCount":192
   },
   "Register":{
-    "AverageRegisterQueueTime":"0.000000s",
-    "MaxRegisterQueueTime":"0.036507s",
-    "TotalRegisterQueueTime":"35.526114s",
-    "RegisterCount":79993355
+    "AverageRegisterQueueTime":"0.043115s",
+    "MaxRegisterQueueTime":"2.000923s",
+    "TotalRegisterQueueTime":"33.069307s",
+    "RegisterCount":767
   },
   "InvalidVehicles":{
-    "Count":20006645
+    "Count":233
   }
 }
