@@ -9,6 +9,17 @@ na Fakultě mechatroniky, informatiky a mezioborových studií na Technické uni
 k čerpací stanici na základě typu paliva a délky fronty. Po tankování je vozidlo přesunuto do fronty u pokladny, kde se 
 simuluje proces placení. Simulace zahrnuje správu front a paralelní zpracování událostí.
 
+### Start
+1. Načtení konfigurace
+2. Start goroutin se stanicemi a pokladnami
+### Tankování vozidla a placení
+3. Generování vozidel a přiřazení k čerpací stanici
+5. Přesun vozidla k pokladně (blokování stanice)
+6. Zaplacení = uvolnění pokladny i stanice
+### Konec
+7. Jakmile je generování dokončeno a všechny fronty stanic jsou prázdné, uzavírají se všechna vlánka
+8. Počítání a výpis statistik
+
 ## Technologie
 Projekt je napsán v jazyce Go, využívající goroutiny pro paralelní zpracování a kanály pro komunikaci mezi částmi 
 systému. Je zaměřen na efektivní správu souběžnosti a poskytuje realistickou simulaci provozu na čerpací stanici.
@@ -45,6 +56,17 @@ The task is to implement a system where the main program generates cars with dif
 assigned to a fueling station based on the fuel type and the length of the queue. After fueling, the vehicle is moved 
 to the queue at the cash register, where the payment process is simulated. The simulation includes queue management and 
 parallel processing of events.
+
+### Start
+1. Configuration loading 
+2. Starting goroutines with stations and cash registers
+### Vehicle refueling and payment
+3. Generating vehicles and assigning them to a gas station
+4. Moving the vehicle to the cash register (blocking the station)
+5. Payment = release of the cash register and station
+### End
+6. Once the generation is complete and all station queues are empty, all threads are closed
+7. Calculation and output of statistics
 
 ## Technology
 The project is written in Go, utilizing goroutines for parallel processing and channels for communication between parts 

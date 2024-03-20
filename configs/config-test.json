@@ -53,7 +53,7 @@
   ],
   "generator": {
     "count_of_cars": 100000000,
-    "generation_delay": [0.01, 0.05],
+    "generation_delay": [0.005, 0.025],
     "fuel_types": [
       "gas",
       "diesel",
