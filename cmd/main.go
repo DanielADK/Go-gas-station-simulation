@@ -182,15 +182,7 @@ func stationRoutine(station *internal.Station, gasStation *GasStation) {
 
 			// Statistics
 			seconds := time.Since(vehicle.StationQueueNow).Seconds()
-			if station.Fuel == "diesel" {
-				gasStation.Statistics.AddDieselTime(seconds)
-			} else if station.Fuel == "gas" {
-				gasStation.Statistics.AddGasTime(seconds)
-			} else if station.Fuel == "lpg" {
-				gasStation.Statistics.AddLPGTime(seconds)
-			} else if station.Fuel == "electric" {
-				gasStation.Statistics.AddElectricTime(seconds)
-			}
+			gasStation.Statistics.AddTime(station.Fuel, seconds)
 
 			// Print
 			//fmt.Printf("[S%02d] Vozidlo na %s tankuje po %2.2fs\n", station.Id, vehicle.Fuel, waitTime)
