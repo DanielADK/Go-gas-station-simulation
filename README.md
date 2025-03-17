@@ -1,8 +1,7 @@
-# GOLANG Simulace čerpací stanice [česky]
+# GO- Simulace čerpací stanice [česky]
 
 Tento projekt je implementací simulace čerpací stanice. Cílem je simulovat proces tankování vozidel různých typů paliva 
-(gas, diesel, lpg, electric, hydrogen) a následného placení na pokladnách. Projekt je vytvořen jako součást předmětu CTC
-na Fakultě mechatroniky, informatiky a mezioborových studií na Technické univerzitě v Liberci (FM TUL).
+(gas, diesel, lpg, electric, hydrogen) a následného placení na pokladnách.
 
 ## Zadání
 Úkolem je implementovat systém, kde hlavní program generuje auta s různými typy paliva. Každé auto je následně přiřazeno
@@ -48,8 +47,7 @@ pokladen.
 
 This project is an implementation of a gas station simulation. The goal is to simulate the fueling process for vehicles 
 with various types of fuel (gas, diesel, lpg, electric, hydrogen) and the subsequent payment process at the cash 
-registers. The project is created as part of the CTC course at the Faculty of Mechatronics, Informatics, and 
-Interdisciplinary Studies at the Technical University of Liberec (FM TUL).
+registers.
 
 ## Assignment
 The task is to implement a system where the main program generates cars with different fuel types. Each car is then 
